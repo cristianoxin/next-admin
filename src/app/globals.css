@@ -76,3 +76,34 @@ body {
 .text-right {
   text-align: right;
 }
+
+.width-full {
+  width: 100%;
+}
+
+.height-full {
+  height: 100%;
+}
+
+/* 骨架布局 */
+.layout {
+  min-width: 1400px;
+}
+
+.layout-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.layout-sidebar {
+  width: 240px;
+  height: calc(100vh - 50px);
+}
+
+.layout-main {
+  box-sizing: border-box;
+  width: calc(100% - 240px);
+  height: calc(100vh - 50px);
+  padding: 10px;
+  overflow-y: auto;
+}

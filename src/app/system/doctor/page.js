@@ -1,20 +1,40 @@
 "use client"
 import { useState, useEffect } from "react";
 import { Table, Button, Modal } from "antd";
-import HospitalForm from "./component/HospitalForm";
 
 import request from "@/server/request";
 
-const HospitalTable = ({ dataSource, loading, onAdd, onEdit }) => {
+const DoctorTable = ({ dataSource, loading, onAdd, onEdit }) => {
 	const columns = [{
-		title: "医院全称",
-		dataIndex: "name"
+		title: "所属医院",
+		dataIndex: ""
 	},{
-		title: "医院等级",
-		dataIndex: "rating"
+		title: "所属科室",
+		dataIndex: ""
 	},{
-		title: "省，市，区",
-		dataIndex: "region"
+		title: "医生姓名",
+		dataIndex: ""
+	},{
+		title: "医生性别",
+		dataIndex: ""
+	},{
+		title: "医生头像",
+		dataIndex: ""
+	},{
+		title: "执业证书",
+		dataIndex: ""
+	},{
+		title: "职称证书",
+		dataIndex: ""
+	},{
+		title: "医生简介",
+		dataIndex: ""
+	},{
+		title: "医生擅长",
+		dataIndex: ""
+	},{
+		title: "医生获奖和成绩",
+		dataIndex: ""
 	},{
 		title: "操作",
 		dataIndex: "id",
@@ -46,40 +66,11 @@ const HospitalTable = ({ dataSource, loading, onAdd, onEdit }) => {
 	);
 }
 
-const Hospital = () => {
+const Doctor = () => {
 	const [ dataSource, setDataSource ] = useState([]);
 	const [ loading, setLoading ] = useState(true);
 	const [ visible, setVisible ] = useState(false);
 	const [ entity, setEntity ] = useState(null);
-
-	useEffect(
-		() => {
-			// getData();
-		}, []
-	)
-
-	const getData = async() => {
-		try {
-			setLoading(true);
-
-			const responseData = await request({
-				url : "/api/hospital"
-			});
-
-			setDataSource(responseData.data);
-		}
-		finally {
-			setLoading(false);
-		}
-	}
-
-	const onSubmit = async(values) => {
-		await request({
-			url : "/api/hospital",
-			method : "POST",
-			params: values
-		});
-	}
 
 	const openModal = () => {
 		setVisible(true);
@@ -102,13 +93,13 @@ const Hospital = () => {
 	return (
 		<div>
 			<div>
-				<HospitalTable dataSource={ dataSource } loading={ loading } onAdd={ onAdd } onEdit={ onEdit } />
+				<DoctorTable dataSource={ dataSource } loading={ loading } onAdd={ onAdd } onEdit={ onEdit } />
 			</div>
-			<Modal title="医院管理" footer={ null } open={ visible } destroyOnClose={ true } onCancel={ closeModal }>
-				<HospitalForm dataSource={ entity } onSubmit={ onSubmit } onClose={ closeModal } />
+			<Modal title="医生管理" footer={ null } open={ visible } destroyOnClose={ true } onCancel={ closeModal }>
+			
 			</Modal>
 		</div>
 	)
 }
 
-export default Hospital;
+export default Doctor;

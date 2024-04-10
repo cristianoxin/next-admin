@@ -1,7 +1,18 @@
+import Header from "@/component/Header";
+import Sidebar from "@/component/Sidebar";
+
 const SystemLayout = ({ children }) => {
 	return (
-		<div>
-			{ children }
+		<div className="layout">
+			<Header />
+		    <div className="layout-container">
+		        <div className="layout-sidebar">
+		          <Sidebar />
+		        </div>
+		        <div className="layout-main">
+		          {children}
+		        </div>
+		    </div>
 		</div>
 	)
 }

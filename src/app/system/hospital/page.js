@@ -18,10 +18,10 @@ const HospitalTable = ({ dataSource, loading, onAdd, onEdit }) => {
 	},{
 		title: "操作",
 		dataIndex: "id",
-		render: (text) => {
+		render: (text, record) => {
 			return (
 				<div>
-					<Button type="primary" onClick={ onEdit }>
+					<Button type="primary" onClick={ () => { onEdit(record) } }>
 						编辑
 					</Button>
 					<Button className="margin-left-smaller">
@@ -54,7 +54,7 @@ const Hospital = () => {
 
 	useEffect(
 		() => {
-			// getData();
+			getData();
 		}, []
 	)
 

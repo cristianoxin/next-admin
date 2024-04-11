@@ -13,6 +13,5 @@ export const POST = async(request, content) => {
 	const requestParams = spliceRequestParams(params);
 	const sql = `insert into hospital set ${ requestParams }`;
 	await query(sql);
-	
 	return NextResponse.json({  },{ status: 200 });
 }

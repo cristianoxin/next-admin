@@ -1,11 +1,12 @@
 import { Form, Input, Select, Button } from "antd";
 
-const DepartmentForm = ({ dataSource, onSubmit, onClose }) => {
+const { Option } = Select;
+
+const DepartmentForm = ({ dataSource, hospitalList, onSubmit, onClose }) => {
 	const [ form ] = Form.useForm();
 
 	const onFinish = async() => {
 		const values = await form.validateFields();
-		values.region = values.region.join(",");
 		onSubmit(values);
 	}
 
@@ -25,13 +26,12 @@ const DepartmentForm = ({ dataSource, onSubmit, onClose }) => {
 								}
 							]}
 				>
-					
 					<Select>
 						{
-							RATING_OPTIONS.map(
+							hospitalList.map(
 								(ele, i) => (
-									<Option value={ ele } key={ i }>
-										{ ele }
+									<Option value={ ele.id } key={ i }>
+										{ ele.name }
 									</Option>
 								)
 							)

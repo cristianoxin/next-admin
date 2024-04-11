@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 import { Form, Input, Cascader, Select, Button } from "antd";
 
 import { REGION_OPTIONS, RATING_OPTIONS } from "@/common/constant";
@@ -8,6 +10,8 @@ const HospitalForm = ({ dataSource, onSubmit, onClose }) => {
 	const onFinish = async() => {
 		const values = await form.validateFields();
 		values.region = values.region.join(",");
+		console.log(values);
+		return;
 		onSubmit(values);
 	}
 
@@ -15,7 +19,7 @@ const HospitalForm = ({ dataSource, onSubmit, onClose }) => {
 		<div className="padding-top-base">
 			<Form labelCol={{ span: 6 }}
 				  wrapperCol={{ span: 18 }}
-				  initialValues={ dataSource }
+				  initialValues={ dataSource ? { ...dataSource, region: dataSource.region.split(",") } : null }
 				  form={ form }
 			>
 				<Form.Item label="医院全称" 

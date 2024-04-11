@@ -3,7 +3,7 @@ import query from "@/server/db";
 import { spliceRequestParams } from "@/common/tool";
 
 export const GET = async(request) => {
-	const sql = "select * from department left join hospital on hospital_id = hospital.id";
+	const sql = "select department.*, hospital.name as hospital_name from department left join hospital on hospital_id = hospital.id";
 	const responseData = await query(sql);
 	return NextResponse.json({ data: responseData },{ status: 200 });
 }

@@ -11,7 +11,7 @@ export const GET = async(request) => {
 export const POST = async(request, content) => {
 	const params = await request.json();
 	const requestParams = spliceRequestParams(params);
-	const sql = `insert into hospital set ${ requestParams }`;
+	const sql = params.id ? `update hospital set ${ requestParams } where id=${ params.id }` : `insert into hospital set ${ requestParams }`;
 	await query(sql);
 	return NextResponse.json({  },{ status: 200 });
 }

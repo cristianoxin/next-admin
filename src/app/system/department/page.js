@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Table, Button, Modal } from "antd";
 import DepartmentForm from "./component/DepartmentForm";
+import HospitalForm from "@/app/system/hospital/component/HospitalForm";
 
 import request from "@/server/request";
 
@@ -48,7 +49,10 @@ const Department = () => {
 	const [ loading, setLoading ] = useState(true);
 	const [ visible, setVisible ] = useState(false);
 	const [ entity, setEntity ] = useState(null);
+
 	const [ hospitalList, setHospitalList ] = useState([]);
+	const [ hospitalVisible, setHospitalVisible ] = useState(false); 
+	const [ hospitalLoading, setHospitalLoading ] = useState(false);
 
 	const getData = async() => {
 		try {
@@ -66,11 +70,37 @@ const Department = () => {
 	}
 
 	const getHospitalList = async() => {
-		const responseData = await request({
-			url : "/api/hospital"
+		try {
+			setHospitalLoading(true);
+
+			const responseData = await request({
+				url : "/api/hospital"
+			});
+
+			setHospitalList(responseData.data);
+		}
+		finally {
+			setHospitalLoading(false);
+		}
+	}
+
+	const onHospitalSubmit = async(values) => {
+		await request({
+			url : "/api/hospital",
+			method : "POST",
+			params: values
 		});
 
-		setHospitalList(responseData.data);
+		getHospitalList();
+		closeHospitalModal();
+	}
+
+	const openHospitalModal = () => {
+		setHospitalVisible(true);
+	}
+
+	const closeHospitalModal = () => {
+		setHospitalVisible(false);
 	}
 
 	useEffect(
@@ -89,13 +119,14 @@ const Department = () => {
 	}
 
 	const onSubmit = async(values) => {
-		console.log(values);
-
 		await request({
 			url : "/api/department",
 			method : "POST",
 			params: values
 		});
+
+		getData();
+		closeModal();
 	}
 
 	const onAdd = () => {
@@ -114,7 +145,10 @@ const Department = () => {
 				<DepartmentTable dataSource={ dataSource } loading={ loading } onAdd={ onAdd } onEdit={ onEdit } />
 			</div>
 			<Modal title="科室管理" footer={ null } open={ visible } destroyOnClose={ true } onCancel={ closeModal }>
-				<DepartmentForm dataSource={ entity } hospitalList={ hospitalList } onSubmit={ onSubmit } onClose={ closeModal } />
+				<DepartmentForm dataSource={ entity } hospitalList={ hospitalList } hospitalLoading={ hospitalLoading } onHospitalSubmit={ onHospitalSubmit } onHospitalOpen={ openHospitalModal } onSubmit={ onSubmit } onClose={ closeModal } />
+			</Modal>
+			<Modal title="医院管理" footer={ null } open={ hospitalVisible } destroyOnClose={ true } onCancel={ closeHospitalModal }>
+				<HospitalForm dataSource={ null } onSubmit={ onHospitalSubmit } onClose={ closeHospitalModal } />
 			</Modal>
 		</div>
 	);

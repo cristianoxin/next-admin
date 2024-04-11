@@ -17611,3 +17611,5 @@ export const REGION_OPTIONS = [
 ];
 
 export const RATING_OPTIONS = ["三级丙等","三级其他","二级甲等","二级乙等","二级丙等","二级其他","一级甲等","一级乙等","一级丙等","专科","民营医院","社区卫生服务中心","乡镇卫生院","村卫生室","民营诊所"];
+
+export const GENDER_OPTIONS = ["男","女"];

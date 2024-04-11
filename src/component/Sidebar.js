@@ -8,8 +8,6 @@ const Sidebar = () => {
 	const pathname = usePathname();
 
 	const getUpperMenu = (menu) => {
-		console.log(menu);
-
 		switch (menu) {
 			case "order" :
 			case "doctor" :

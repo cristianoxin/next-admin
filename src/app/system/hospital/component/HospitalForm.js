@@ -4,14 +4,14 @@ import { Form, Input, Cascader, Select, Button } from "antd";
 
 import { REGION_OPTIONS, RATING_OPTIONS } from "@/common/constant";
 
+const { Option } = Select;
+
 const HospitalForm = ({ dataSource, onSubmit, onClose }) => {
 	const [ form ] = Form.useForm();
 
 	const onFinish = async() => {
 		const values = await form.validateFields();
 		values.region = values.region.join(",");
-		console.log(values);
-		return;
 		onSubmit(values);
 	}
 

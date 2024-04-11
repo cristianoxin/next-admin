@@ -85,6 +85,31 @@ body {
   height: 100%;
 }
 
+.justify-start {
+  display: flex !important;
+  justify-content: flex-start;
+}
+
+.justify-center {
+  display: flex !important;
+  justify-content: center;
+}
+
+.justify-end {
+  display: flex !important;
+  justify-content: flex-end;
+}
+
+.justify-between {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.align-center {
+  display: flex !important;
+  align-items: center;
+}
+
 /* 骨架布局 */
 .layout {
   min-width: 1400px;

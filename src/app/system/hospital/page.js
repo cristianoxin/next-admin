@@ -79,6 +79,9 @@ const Hospital = () => {
 			method : "POST",
 			params: values
 		});
+
+		getData();
+		closeModal();
 	}
 
 	const openModal = () => {
